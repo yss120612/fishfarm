@@ -1,0 +1,20 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Страница входа в систему</title>
+</head>
+<body>
+<div th:if="${param.error}">
+    Не существующий логин или не верный пароль.
+</div>
+<div th:if="${param.logout}">
+    Вы вышли из приложения.
+</div>
+<form method="POST" th:action="@{/login}" id="loginForm">
+    <label for="username">Логин: </label>
+    <input type="text" name="username" id="username" /><br/>
+    <label for="password">Пароль: </label>
+    <input type="password" name="password" id="password" /><br/>
+    <input type="submit" value="Войти"/>
+    </form>
+</body>
+</html>
