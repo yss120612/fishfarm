@@ -17,26 +17,26 @@ import com.farms.fishfarm.services.UDService;
 public class WebSecurityConfig {
         private UDService uDService;
         private BCryptPasswordEncoder passwordEncoder;
-        public WebSecurityConfig(UDService uDService,BCryptPasswordEncoder passwordEncoder) {
-                this.uDService = uDService;
-                this.passwordEncoder=passwordEncoder;
-        }
+        private SuccessHandler successHandler;
+        
 
-        // @Bean
-        // public BCryptPasswordEncoder passwordEncoder() {
-        //         return new BCryptPasswordEncoder();
-        // }
+        public WebSecurityConfig(UDService uDService, BCryptPasswordEncoder passwordEncoder, SuccessHandler successHandler) {
+                this.uDService = uDService;
+                this.passwordEncoder = passwordEncoder;
+                this.successHandler = successHandler;
+        }
 
         @Bean
         public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
                 http
                 .httpBasic(httpBasic->{})                
                 .authorizeHttpRequests((requests) -> requests
-                                                .requestMatchers("/","/home", "/registration").permitAll()
+                                                .requestMatchers("/").permitAll()
                                                 .anyRequest().authenticated())
                                 .formLogin((form) -> form
                                                 .loginPage("/login")
-                                                .defaultSuccessUrl("/main")
+                                                .successHandler(successHandler)
+                                                //.defaultSuccessUrl("/main",true)
                                                 .permitAll())
                                 .logout((logout) -> logout
                                                 .permitAll()

@@ -1,5 +1,10 @@
 package com.farms.fishfarm.services;
 
+import java.util.List;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -18,6 +23,7 @@ import com.farms.fishfarm.repo.UserRepository;
 public class UDService implements UserDetailsService {
 
     
+
     private BCryptPasswordEncoder passEncoder;
     private UserRepository userRepository;
     private RoleRepository roleRepository;
@@ -53,6 +59,8 @@ public class UDService implements UserDetailsService {
         return false;// role already exists
     }
 
+  
+
     public boolean addRoleToUserByName(String username, String rolename) {
         User fuser = null;
         Role frole = null;
@@ -87,6 +95,17 @@ public class UDService implements UserDetailsService {
         u.setUsername(name);
         u.setPassword(pass);
         u.setFirm(firm);
+        u.setEnabled(true);
+        return addUser(u);
+    }
+
+    public boolean addUser(String name, String pass, String firmName) {
+        Firm firm=firmRepository.findByShortname(firmName).orElse(null);
+        if (firm==null) return false;
+        User u = new User();
+        u.setUsername(name);
+        u.setPassword(pass);
+        u.setFirm(firm.getId());
         u.setEnabled(true);
         return addUser(u);
     }

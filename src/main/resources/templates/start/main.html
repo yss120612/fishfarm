@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"></html>
+
+<head>
+    <th:block th:insert="fragments/common.html :: meta"></th:block>
+    <th:block th:insert="fragments/common.html :: styles"></th:block>
+    <th:block th:insert="fragments/common.html :: title('login')"></th:block>
+</head>
+<h1>Main page</h1>
+<hr>
+<a href="/logout">logout</a>
+<br>
+<h5 th:text="${user}">remove me</h5>
+<body>
+$END$
+</body>
+<th:block th:insert="fragments/common.html :: script"></th:block>
+</html>

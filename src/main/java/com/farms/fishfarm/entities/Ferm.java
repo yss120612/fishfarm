@@ -18,6 +18,20 @@ public class Ferm {
     @Column(name="firmId",nullable = false)
     private Long firmId;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fermId")
+    private Set<RealSadok> realSadok;
+
+
+    public Set<RealSadok> getRealSadok() {
+        return this.realSadok;
+    }
+
+    public void setRealSadok(Set<RealSadok> realSadok) {
+        this.realSadok = realSadok;
+    }
+
+
     public Long getId() {
         return this.id;
     }

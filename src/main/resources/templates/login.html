@@ -1,13 +1,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
-    <title>Страница входа в систему</title>
+    <th:block th:insert="fragments/common.html :: meta"></th:block>
+    <th:block th:insert="fragments/common.html :: styles"></th:block>
+    <th:block th:insert="fragments/common.html :: title('login')"></th:block>
 </head>
 <body>
-<div th:if="${param.error}">
-    Не существующий логин или не верный пароль.
+<!-- <div th:if="${param.error}"> -->
+<div th:if="${error}"></div>
+    <p th:text="${error}"></p>
+    <!-- Не существующий логин или не верный пароль. -->
 </div>
-<div th:if="${param.logout}">
-    Вы вышли из приложения.
+<div th:if="${messa}">
+    <p th:text="${messa}"></p>
 </div>
 <form method="POST" th:action="@{/login}" id="loginForm">
     <label for="username">Логин: </label>
@@ -17,4 +21,5 @@
     <input type="submit" value="Войти"/>
     </form>
 </body>
+    <th:block th:insert="fragments/common.html :: script"></th:block>
 </html>

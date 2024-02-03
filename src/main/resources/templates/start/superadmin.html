@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"></html>
+
+<head>
+    <th:block th:insert="fragments/common.html :: meta"></th:block>
+    <th:block th:insert="fragments/common.html :: styles"></th:block>
+    <th:block th:insert="fragments/common.html :: title('sa_title')"></th:block>
+</head>
+
+<body>
+
+<div class="container-fluid">
+<div class="row row-cols-1 sticky-top">
+    <div class="col">
+        <br>
+        <a href="/logout">logout</a>
+        <br>
+    </div>
+</div>
+<div class="row row-cols-1">
+    <div class="col">
+        <h2>Super Admin Page</h2>
+    </div>
+</div>
+<div class="row row-cols-2">
+    <div class="col col col-md-3 bg-success">
+        <th:block th:insert="fragments/common.html :: menu('list')"></th:block>
+    </div>
+    <div class="col">
+        content
+    </div>
+</div>
+<div class="row row-cols-1 fixed-bottom">
+    <div class="col">
+        FOOTER
+    </div>
+</div>
+</div>
+
+</body>
+<th:block th:insert="fragments/common.html :: script"></th:block>
+</html>

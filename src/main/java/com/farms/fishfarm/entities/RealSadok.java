@@ -21,13 +21,27 @@ public class RealSadok {
     @GeneratedValue(strategy= GenerationType.AUTO, generator="rsadok_gen")
     @GenericGenerator(name="rsadok_gen")
     private Long id;
+
     @Column(name="name",length=256,nullable = false)
     private String name;
+
     @Column(name="description",length=256)
     private String description;
+
+    @Column(name="fermId",nullable = false)
+    private Long fermId;
+    
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "rSadokId")
     private Set<VirtualSadok> vsadoks;
+
+    public Long getFermId() {
+        return this.fermId;
+    }
+
+    public void setFermId(Long fermId) {
+        this.fermId = fermId;
+    }
 
 
     public Long getId() {
