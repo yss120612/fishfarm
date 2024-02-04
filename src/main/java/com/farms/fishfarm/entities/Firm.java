@@ -2,6 +2,7 @@ package com.farms.fishfarm.entities;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -22,12 +23,10 @@ public class Firm {
     @Column(name="address",length=256,nullable = true)
     private String address;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "firmId")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "firmId")
     private Set<User> users;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "firmId")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "firmId")
     private Set<Ferm> ferms;
     
     public Firm() {
@@ -79,17 +78,19 @@ public class Firm {
         return this.users;
     }
 
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
+   
 
     public Set<Ferm> getFerms() {
         return this.ferms;
     }
-
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
     public void setFerms(Set<Ferm> ferms) {
         this.ferms = ferms;
     }
+
+    
 }
 
     

@@ -34,7 +34,19 @@ public class FirmService {
         this.virtualSadokRepository = virtualSadokRepository;
     }
 
-    
+    public Firm findById(Long id){
+        if (id==null) return null;
+        return firmRepository.findById(id).orElse(null);
+    }
+
+    public Firm findByName(String name){
+        if (name==null) return null;
+        return firmRepository.findByShortname(name).orElse(null);
+    }
+
+    public void deleteFirm(Firm firm){
+        firmRepository.delete(firm);
+    }
 
     public boolean addFirm(Firm firm){
         Firm ffirm = null;
@@ -91,8 +103,8 @@ public class FirmService {
             return false;
         } else {
             if (ferm.getFirmId()==null) return false;
-            Firm firm=firmRepository.findById(ferm.getFirmId()).orElse(null);
-            if (firm==null) return false;    
+            //Firm firm=firmRepository.findById(ferm.getFirmId()).orElse(null);
+            //if (firm==null) return false;    
             fermRepository.save(ferm);// insert-update firm
         }
         return true;
@@ -102,7 +114,7 @@ public class FirmService {
         if (firmId==null) return false;
         Ferm ferm = new Ferm();
         ferm.setName(name);
-        ferm.setFirmId(firmId);
+        ferm.setFirmId(firmRepository.findById(firmId).orElse(null));
         return addFerm(ferm);
     }
 
@@ -112,13 +124,13 @@ public class FirmService {
         ferm.setName(name);
         Firm firm=firmRepository.findByShortname(firmName).orElse(null);
         if (firm==null) return false;
-        ferm.setFirmId(firm.getId());
+        ferm.setFirmId(firm);
         return addFerm(ferm);
     }
    
     public boolean addRealSadok(RealSadok rsadok){
          if (rsadok.getFermId()==null) return false;
-         Ferm ferm=fermRepository.findById(rsadok.getFermId()).orElse(null);
+         Ferm ferm=fermRepository.findById(rsadok.getFermId().getId()).orElse(null);
          if (ferm==null) return false;    
          realSadokRepository.save(rsadok);// insert-update firm
          return true;
@@ -136,14 +148,14 @@ public class FirmService {
         if (fermId==null) return false;
         RealSadok rsadok = new RealSadok();
         rsadok.setName(name);
-        rsadok.setFermId(fermId);
+        rsadok.setFermId(fermRepository.findById(fermId).orElse(null));
         rsadok.setDescription(descr);
         return addRealSadok(rsadok);
     }
 
     public boolean addVirtualSadok(VirtualSadok vsadok){
         if (vsadok.getRSadokId()==null) return false;
-        RealSadok rsadok=realSadokRepository.findById(vsadok.getRSadokId()).orElse(null);
+        RealSadok rsadok=realSadokRepository.findById(vsadok.getRSadokId().getId()).orElse(null);
         if (rsadok==null) return false;    
         virtualSadokRepository.save(vsadok);// insert-update firm
         return true;
@@ -153,7 +165,7 @@ public class FirmService {
        if (rsadokId==null) return false;
        VirtualSadok vsadok = new VirtualSadok();
        vsadok.setName(name);
-       vsadok.setRSadokId(rsadokId);
+       vsadok.setRSadokId(realSadokRepository.findById(rsadokId).orElse(null));
        return addVirtualSadok(vsadok);
    }
 

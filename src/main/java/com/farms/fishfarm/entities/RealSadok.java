@@ -11,6 +11,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -28,18 +29,19 @@ public class RealSadok {
     @Column(name="description",length=256)
     private String description;
 
-    @Column(name="fermId",nullable = false)
-    private Long fermId;
+    //@Column(name="fermId",nullable = false)
+    @ManyToOne
+    @JoinColumn(name="ferm_id", nullable=false)
+    private Ferm fermId;
     
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "rSadokId")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy="rSadokId")
     private Set<VirtualSadok> vsadoks;
 
-    public Long getFermId() {
+    public Ferm getFermId() {
         return this.fermId;
     }
 
-    public void setFermId(Long fermId) {
+    public void setFermId(Ferm fermId) {
         this.fermId = fermId;
     }
 

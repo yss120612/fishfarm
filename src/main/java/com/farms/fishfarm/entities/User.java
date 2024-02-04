@@ -6,6 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 
@@ -25,8 +26,9 @@ public class User implements UserDetails {
     @Column(name="email",length=128)
     private String email;
 
-    @Column(name="firmId")
-    private Long firmId;
+    @ManyToOne
+    @JoinColumn(name="firm_id")
+    private Firm firmId;
 
     @Column(name="active")
     private boolean active;
@@ -55,13 +57,27 @@ public class User implements UserDetails {
     }
 
 
-    public Long getFirm() {
+    public Firm getFirmId() {
         return this.firmId;
     }
 
-    public void setFirm(Long firm) {
-        this.firmId = firm;
+    public void setFirmId(Firm firmId) {
+        this.firmId = firmId;
     }
+
+    public boolean isActive() {
+        return this.active;
+    }
+
+    public boolean getActive() {
+        return this.active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+  
 
     
     public Set<Role> getRoles() {
@@ -80,7 +96,7 @@ public class User implements UserDetails {
                     name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(
                     name = "role_id", referencedColumnName = "id"))
-    private Set<Role> roles;
+    private Set<Role> roles=new HashSet<>();
 
     public Long getId() {
         return id;

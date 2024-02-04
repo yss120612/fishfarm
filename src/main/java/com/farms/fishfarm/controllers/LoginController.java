@@ -1,35 +1,21 @@
 package com.farms.fishfarm.controllers;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.util.WebUtils;
-
-import com.farms.fishfarm.entities.User;
-import com.farms.fishfarm.repo.RoleRepository;
-
-import com.farms.fishfarm.services.UDService;
 
 @Controller
 public class LoginController {
 
-    private UDService uDService;
-    private RoleRepository roleRepository;
+    // private UDService uDService;
+    // private RoleRepository roleRepository;
 
-    public LoginController(UDService uDService, RoleRepository roleRepository) {
-        this.uDService = uDService;
-        this.roleRepository = roleRepository;
-    }
+    // public LoginController(UDService uDService, RoleRepository roleRepository) {
+    //     this.uDService = uDService;
+    //     this.roleRepository = roleRepository;
+    // }
 
     // @GetMapping("/login")
     // public String login(){

@@ -15,11 +15,13 @@ public class Ferm {
     private Long id;
     @Column(name="name",unique = true,length=128,nullable = false)
     private String name;
-    @Column(name="firmId",nullable = false)
-    private Long firmId;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fermId")
+    @ManyToOne
+    @JoinColumn(name="firm_id", nullable=false)
+    private Firm firmId;
+
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "fermId")
+    //@JoinColumn(name = "realSadok")
     private Set<RealSadok> realSadok;
 
 
@@ -48,11 +50,13 @@ public class Ferm {
         this.name = name;
     }
 
-    public Long getFirmId() {
+    
+
+    public Firm getFirmId() {
         return this.firmId;
     }
 
-    public void setFirmId(Long firmId) {
+    public void setFirmId(Firm firmId) {
         this.firmId = firmId;
     }
 

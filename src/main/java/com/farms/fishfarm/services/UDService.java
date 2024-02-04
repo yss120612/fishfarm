@@ -1,6 +1,9 @@
 package com.farms.fishfarm.services;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.Authentication;
@@ -69,7 +72,7 @@ public class UDService implements UserDetailsService {
         if (fuser == null || frole == null)
             return false;
 
-        if (fuser.getRoles()==null || !fuser.getRoles().contains(frole)) {
+        if (!fuser.getRoles().contains(frole)) {
             fuser.getRoles().add(frole);
             userRepository.save(fuser);
             return true;
@@ -83,7 +86,7 @@ public class UDService implements UserDetailsService {
         User u = new User();
         u.setUsername(name);
         u.setPassword(pass);
-        u.setFirm(firm);
+        u.setFirmId(firmRepository.findById(firm).orElse(null));
         u.setEnabled(true);
         u.setEmail(email);
         u.setComment(description);
@@ -94,7 +97,7 @@ public class UDService implements UserDetailsService {
         User u = new User();
         u.setUsername(name);
         u.setPassword(pass);
-        u.setFirm(firm);
+        u.setFirmId(firmRepository.findById(firm).orElse(null));
         u.setEnabled(true);
         return addUser(u);
     }
@@ -105,7 +108,7 @@ public class UDService implements UserDetailsService {
         User u = new User();
         u.setUsername(name);
         u.setPassword(pass);
-        u.setFirm(firm.getId());
+        u.setFirmId(firm);
         u.setEnabled(true);
         return addUser(u);
     }
@@ -158,7 +161,29 @@ public class UDService implements UserDetailsService {
        return "";
     }
 
-   
+    public String resetPassword(String username, String newpass) {
+        User u = userRepository.findByUsername(username).orElse(null);
+        if (u == null) {
+            return "Пользователь " + username + " не найден!";
+         }
+        u.setPassword(passEncoder.encode(newpass));
+        userRepository.save(u);
+        return "";
+    }
+
+    public List<User> getAll2firm(Long id) {
+        Firm firm=firmRepository.findById(id).orElse(null);
+        if (firm==null) return new ArrayList<>();
+        return userRepository.findByFirmId(firm);
+    }
+
+    public User getUserById(Long id){
+        return userRepository.findById(id).orElse(null);
+    }
+
+    public void deleteUserById(Long id) {
+        userRepository.deleteById(id);
+    }
 
 
 }
