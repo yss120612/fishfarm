@@ -31,7 +31,9 @@ public class WebSecurityConfig {
                 http
                 .httpBasic(httpBasic->{})                
                 .authorizeHttpRequests((requests) -> requests
-                                                .requestMatchers("/").permitAll()
+                                                // .requestMatchers("/").permitAll()
+                                                .requestMatchers("/superadmin/**").hasRole("SUPER_ADMIN")
+                                                .requestMatchers("/formadmin/**").hasRole("FIRM_ADMIN")
                                                 .anyRequest().authenticated())
                                 .formLogin((form) -> form
                                                 .loginPage("/login")

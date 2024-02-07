@@ -1,30 +1,27 @@
 
 
-<th:block th:fragment="list_content">
+<th:block th:fragment="fermlist_content">
     <table class="table">
         <thead>
             <tr>
-                <th width="15%">Наименование</th>
-                <th width="15%">ИНН</th>
-                <th width="50%">Информация</th>
-                <th width="20%">Действия</th>
+                <th width="70%">Информация</th>
+                <th width="30%">Действия</th>
             </tr>
         </thead>
         <tbody>
-                <tr th:each="firm:${firms}">
-                    <td th:text="${firm.getShortname()}"></td>
-                    <td th:text="${firm.getInn()}"></td>
-                    <td th:utext="${firm.getFullname()+'<br>Пользователей: '+firm.getUsers().size()+'<br>Ферм: ' + firm.getFerms().size()}"></td>
+                <tr th:each="ferm:${ferms}">
+                    <td th:utext="${ferm.getName()+'<br>Садков: '+ferm.getRealSadok.size()}"></td>
+                    
                     <td>
                         <div class="action">
                             <div class="action-btn">
-                                <a th:href="@{/superadmin/editfirm/{id}(id=${firm.getId()})}"><i class="fas fa-edit text-success" title="Редактировать"></i></a>
+                                <a th:href="@{/firmadmin/editferm/{id}(id=${ferm.getId()})}"><i class="fas fa-edit text-success" title="Редактировать"></i></a>
                             </div>
                             <div class="action-btn">
-                                <a th:href="@{/superadmin/adminslist/{id}(id=${firm.getId()})}"><i class="fas fa-universal-access text-primary" title="Админы"></i></a>
+                                <a th:href="@{/firmadmin/adminslist/{id}(id=${ferm.getId()})}"><i class="fas fa-universal-access text-primary" title="Админы"></i></a>
                             </div>
                             <div class="action-btn">
-                                <a th:href="@{/superadmin/delfirm/{id}(id=${firm.getId()})}"><i class="fas fa-times text-danger" title="Удалить"></i></a>
+                                <a th:href="@{/firmadmin/delferm/{id}(id=${ferm.getId()})}"><i class="fas fa-times text-danger" title="Удалить"></i></a>
                             </div>
                         </div>
                     </td>
@@ -35,35 +32,23 @@
     </table>
 </th:block>
 
-<th:block th:fragment="add_firm(route)">
-    <form method="POST" th:object="${firm}" th:action="@{/superadmin/savefirm}">
-        <div class="form-header" th:if="${route == 'addfirm'}"><h3>Добавление организации</h3></div>
-        <div class="form-header" th:if="${route == 'editfirm'}"><h3>Редактирование организации</h3></div>
+<th:block th:fragment="addferm(route)">
+    <form method="POST" th:object="${ferm}" th:action="@{/firmadmin/saveferm}">
+        <div class="form-header" th:if="${route == 'addferm'}"><h3>Добавление фермы</h3></div>
+        <div class="form-header" th:if="${route == 'editferm'}"><h3>Редактирование фермы</h3></div>
         <input type="hidden" class="form-control" name="id" th:field ="*{id}"/>
+        <input type="hidden" class="form-control" name="firmId" th:field ="*{firmId}"/>
         <div class="form-row">
-            <label for="shortname" class="form-label">Наименование</label>
-            <input type="text" class="form-control" name="shortname" th:field ="*{shortname}"/>
+            <label for="name" class="form-label">Наименование</label>
+            <input type="text" class="form-control" name="name" th:field ="*{name}"/>
         </div>
-        <div class="form-row">
-            <label for="inn" class="form-label">ИНН</label>
-            <input type="text" class="form-control" name="inn" th:field ="*{inn}"/>
-        </div>
-        <div class="form-row">
-            <label for="address" class="form-label">Адрес</label>
-            <input type="text" class="form-control" name="address" th:field ="*{address}"/>
-        </div>
-        <div class="form-row">
-            <label for="fullname" class="form-label">Полное наименование</label>
-            <input type="text" class="form-control" name="fullname" th:field ="*{fullname}"/>
-        </div>
+        
         <br><hr>
         <div class="form-row buttons">
             <button type="submit" class="btn btn-primary">OK</button>
             <button type="reset" class="btn btn-outline-secondary">Очистить</button>
         </div>
     </form>
-
-
 </th:block>
 
 
@@ -96,13 +81,13 @@
 
 
 
-<th:block th:fragment="sa_menu(route)">
+<th:block th:fragment="menu(route)">
     <div class="menu">
-        <em><i class="fas fa-umbrella"></i> Организации</em>
+        <em><i class="fas fa-square-o"></i> Фермы</em>
         <ul>
             <li>
-                <a class="active" th:if="${route == 'list'}">Список</a>
-                <a th:href="@{/superadmin}" th:unless="${route == 'list'}">Список</a>
+                <a class="active" th:if="${route == 'fermlist'}">Список</a>
+                <a th:href="@{/fermadmin}" th:unless="${route == 'fermlist'}">Список</a>
             </li>
             <li>
                 <a class="active" th:if="${route == 'seek'}">Поиск</a>
@@ -110,36 +95,12 @@
             </li>
             <li>
                 <a class="active" th:if="${route == 'addfirm'}">Создать</a>
-                <a th:href="@{/superadmin/addfirm}" th:unless="${route == 'addfirm'}">Создать</a>
+                <a th:href="@{/firmadmin/addferm}" th:unless="${route == 'addferm'}">Создать</a>
             </li>
         </ul>
     </div>
 </th:block>
 
-<th:block th:fragment="sa_admins_menu(route)">
-    <div class="menu">
-        <i class="fas fa-universal-access"></i>
-        <em th:if="${route == 'adminlist'}" th:utext="' Админы<br>'+${firmname}"></em>
-        <em th:unless="${route == 'adminlist'}" th:utext="' Админы<br>'+${admin.getFirmname()}"></em>
-        <ul>
-            <li>
-                <a class="active" th:if="${route == 'adminlist'}">Список</a>
-                <a th:href="@{/superadmin/adminlist/{id}(id=${firmid})}" th:unless="${route == 'adminlist'}">Список</a>
-            </li>
-            <li>
-                <a class="active" th:if="${route == 'seek'}">Поиск</a>
-                <a href="@{/}" th:unless="${route == 'seek'}">Поиск</a>
-            </li>
-            <li>
-                <a class="active" th:if="${route == 'addadmin'}">Создать</a>
-                <a th:href="@{/superadmin/addadmin/{id}(id=${firmid})}" th:unless="${route == 'addadmin'}">Создать</a>
-            </li>
-            <li>
-                <a th:href="@{/superadmin}">Организации</a>
-            </li>
-        </ul>
-    </div>
-</th:block>
 
 
 <th:block th:fragment="admin_list">

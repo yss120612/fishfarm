@@ -34,9 +34,6 @@ public class SuccessHandler implements AuthenticationSuccessHandler {
             Authentication authentication) throws IOException {
         String targetUrl = determineTargetUrl(authentication);
         if (response.isCommitted()) {
-            // logger.debug(
-            // "Response has already been committed. Unable to redirect to "
-            // + targetUrl);
             return;
         }
 
@@ -44,20 +41,10 @@ public class SuccessHandler implements AuthenticationSuccessHandler {
     }
 
     protected String determineTargetUrl(final Authentication authentication) {
-        // Map<String, String> roleTargetUrlMap = new HashMap<>();
-        // roleTargetUrlMap.put("ROLE_USER", "/main");
-        // roleTargetUrlMap.put("ROLE_SUPER_ADMIN", "/superadmin");
-        // roleTargetUrlMap.put("ROLE_FIRM_ADMIN", "/firmadmin");
-
         final Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         for (final GrantedAuthority grantedAuthority : authorities) {
-            //String authorityName = grantedAuthority.getAuthority();
             if (grantedAuthority.getAuthority().contains("ROLE_SUPER_ADMIN")) return "/superadmin";
             if (grantedAuthority.getAuthority().contains("ROLE_FIRM_ADMIN")) return "/firmadmin";
-            // if (roleTargetUrlMap.containsKey(authorityName)) {
-            //     return roleTargetUrlMap.get(authorityName);
-            // }
-
         }
         return "/main";
 

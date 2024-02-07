@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -177,13 +178,31 @@ public class UDService implements UserDetailsService {
         return userRepository.findByFirmId(firm);
     }
 
+    public List<User> getAllAdmins2firm(Long id) {
+        // Firm firm=firmRepository.findById(id).orElse(null);
+        // Set<Role> roles=new HashSet<>();
+        // Role role=roleRepository.findByName("ROLE_FIRM_ADMIN").orElse(null);
+        // roles.add(role);
+        // if (firm==null) return new ArrayList<>();
+        return userRepository.getUsersInRole(id,"ROLE_FIRM_ADMIN");
+    }
+
+
     public User getUserById(Long id){
         return userRepository.findById(id).orElse(null);
     }
 
     public void deleteUserById(Long id) {
         userRepository.deleteById(id);
+        
     }
 
+    public void deleteRole(Long id){
+        roleRepository.deleteRole(null, id);
+    }
 
+    public void deleteUser(Long id){
+        userRepository.deleteUser(id,null);
+    }
+    
 }

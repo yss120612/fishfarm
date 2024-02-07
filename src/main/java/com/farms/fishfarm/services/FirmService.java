@@ -127,6 +127,18 @@ public class FirmService {
         ferm.setFirmId(firm);
         return addFerm(ferm);
     }
+
+    public Ferm getFerm(Long id){
+        
+        return fermRepository.findById(id).orElse(null);
+    }
+
+    public List<Ferm> listFerms(Long firmId){
+        Firm f=findById(firmId);
+        if (f==null) return null;
+        return fermRepository.findByFirmId(f);
+    }
+
    
     public boolean addRealSadok(RealSadok rsadok){
          if (rsadok.getFermId()==null) return false;

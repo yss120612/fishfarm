@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,6 +17,9 @@ import com.farms.fishfarm.entities.Firm;
 import com.farms.fishfarm.entities.User;
 import com.farms.fishfarm.services.UDService;
 import com.farms.fishfarm.services.UserHelper;
+
+
+
 import com.farms.fishfarm.services.FirmService;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -31,7 +35,8 @@ public SuperAdminController(UDService uDService, FirmService firmService) {
         this.uDService = uDService;
         this.firmService = firmService;
     }
-
+    
+    
     @GetMapping("")
     public String main(Model model){
         if (SecurityContextHolder.getContext().getAuthentication()!=null)
@@ -87,7 +92,7 @@ public SuperAdminController(UDService uDService, FirmService firmService) {
 
     @GetMapping("/adminslist/{id}")
     public String adminsList(@PathVariable(name = "id") Long id, Model model){
-        List<User> users=  uDService.getAll2firm(id);
+        List<User> users=  uDService.getAllAdmins2firm(id);
         model.addAttribute("admins",users);
         model.addAttribute("firmid",id);
         Firm firm=firmService.findById(id);
@@ -169,7 +174,7 @@ public SuperAdminController(UDService uDService, FirmService firmService) {
     public String deleteAdminP(@ModelAttribute(name = "admin") UserHelper admin){
         // Logger logger = LoggerFactory.getLogger(SuperAdminController.class);
         // logger.info("ID=%d".formatted(firm.getId()));
-        uDService.deleteUserById(admin.getId());
+        uDService.deleteUser(admin.getId());
         return "redirect:/superadmin/adminslist/%d".formatted(admin.getFirmid());
     }
 
