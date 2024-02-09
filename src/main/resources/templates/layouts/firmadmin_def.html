@@ -3,9 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 
 <head>
-    <th:block th:insert="~{fragments/common.html :: meta}"></th:block>
-    <th:block th:insert="~{fragments/common.html :: styles}"></th:block>
-    <th:block th:insert="~{fragments/common.html :: title(${route})}"></th:block>
+    <th:block th:insert="~{fragments/meta.html :: meta}"></th:block>
+    <th:block th:insert="~{fragments/styles.html :: styles}"></th:block>
+    <th:block th:insert="~{fragments/title.html :: title(${route})}"></th:block>
 </head>
 
 <body>
@@ -20,13 +20,23 @@
 </div>
 <div class="row row-cols-1">
     <div class="col">
-        <h2 th::text="'Admin for '+${firmname}">Admin</h2>
+        <h3  th:text = "'Администрирование организации «'+${firmname}+'»'" >Admin</h3>
+        <h4 th:text = "${errorMessage}" class="text-danger"> Error</h4>
     </div>
 </div>
 <div class="row row-cols-2">
     <div class="col col col-md-3">
         <p th:switch="${route}">
             <th:block th:case="fermlist">
+                <th:block th:insert="~{content/firmadmin_content.html :: menu(${route})}"></th:block>
+            </th:block>    
+            <th:block th:case="addferm">
+                <th:block th:insert="~{content/firmadmin_content.html :: menu(${route})}"></th:block>
+            </th:block>    
+            <th:block th:case="editferm">
+                <th:block th:insert="~{content/firmadmin_content.html :: menu(${route})}"></th:block>
+            </th:block>    
+            <th:block th:case="delferm">
                 <th:block th:insert="~{content/firmadmin_content.html :: menu(${route})}"></th:block>
             </th:block>    
         </p>
@@ -39,20 +49,27 @@
                 <th:block th:case="addferm">
                     <th:block th:insert="~{content/firmadmin_content.html :: addferm(${route})}"></th:block>
                 </th:block>    
+                <th:block th:case="editferm">
+                    <th:block th:insert="~{content/firmadmin_content.html :: addferm(${route})}"></th:block>
+                </th:block>    
+                <th:block th:case="delferm">
+                    <th:block th:insert="~{content/firmadmin_content.html :: delferm}"></th:block>
+                </th:block>    
             </p>
         
     </div>
 </div>
 <div class="row row-cols-1 fixed-bottom">
     <div class="col">
-        FOOTER
+        <th:block th:insert="~{fragments/footer.html :: footer}"></th:block>
     </div>
 </div>
 </div>
 
 </body>
-<th:block th:insert="~{fragments/common.html :: script}"></th:block>
+<th:block th:insert="~{fragments/sctripts.html :: script}"></th:block>
 </html>
 </th:block>
+
 
 

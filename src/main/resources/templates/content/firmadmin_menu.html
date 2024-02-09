@@ -1,0 +1,25 @@
+<th:block th:fragment="menu(route)">
+    <div class="menu">
+        <em><i class="fas fa-square-o"></i> Фермы</em>
+        <ul>
+            <li>
+                <a class="active" th:if="${route == 'fermlist'}">Список</a>
+                <a th:href="@{/fermadmin}" th:unless="${route == 'fermlist'}">Список</a>
+            </li>
+            <li>
+                <a class="active" th:if="${route == 'seek'}">Поиск</a>
+                <a th:href="@{/}" th:unless="${route == 'seek'}">Поиск</a>
+            </li>
+            <li th:unless="${route == 'addferm'}">
+                <a th:href="@{/firmadmin/addferm}">Создать</a>
+            </li>
+            <li th:unless="${route == 'userlist'}">
+                <a th:href="@{/firmadmin/userlist}">Пользователи</a>
+            </li>
+            <li th:unless="${route == 'fermlist'}">
+                <a th:href="@{/firmadmin}" >Фермы</a>
+            </li>
+        </ul>
+    </div>
+</th:block>
+

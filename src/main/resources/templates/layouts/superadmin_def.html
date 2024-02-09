@@ -3,9 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 
 <head>
-    <th:block th:insert="~{fragments/common.html :: meta}"></th:block>
-    <th:block th:insert="~{fragments/common.html :: styles}"></th:block>
-    <th:block th:insert="~{fragments/common.html :: title(${route})}"></th:block>
+    <th:block th:insert="~{fragments/meta.html :: meta}"></th:block>
+    <th:block th:insert="~{fragments/styles.html :: styles}"></th:block>
+    <th:block th:insert="~{fragments/title.html :: title(${route})}"></th:block>
 </head>
 
 <body>
@@ -27,16 +27,16 @@
     <div class="col col col-md-3">
         <p th:switch="${route}">
             <th:block th:case="adminlist">
-                <th:block th:insert="~{content/superadmin_content.html :: sa_admins_menu(${route})}"></th:block>
+                <th:block th:insert="~{content/superadmin_menu.html :: sa_admins_menu(${route})}"></th:block>
             </th:block>    
             <th:block th:case="addadmin">
-                <th:block th:insert="~{content/superadmin_content.html :: sa_admins_menu(${route})}"></th:block>
+                <th:block th:insert="~{content/superadmin_menu.html :: sa_admins_menu(${route})}"></th:block>
             </th:block>    
             <th:block th:case="editadmin">
-                <th:block th:insert="~{content/superadmin_content.html :: sa_admins_menu(${route})}"></th:block>
+                <th:block th:insert="~{content/superadmin_menu.html :: sa_admins_menu(${route})}"></th:block>
             </th:block>    
             <th:block th:case="*">
-                <th:block th:insert="~{content/superadmin_content.html :: sa_menu(${route})}"></th:block>
+                <th:block th:insert="~{content/superadmin_menu.html :: sa_menu(${route})}"></th:block>
             </th:block>    
         </p>
     </div>
@@ -72,13 +72,13 @@
 </div>
 <div class="row row-cols-1 fixed-bottom">
     <div class="col">
-        FOOTER
+        <th:block th:insert="~{fragments/footer.html :: footer}"></th:block>
     </div>
 </div>
 </div>
 
 </body>
-<th:block th:insert="~{fragments/common.html :: script}"></th:block>
+<th:block th:insert="~{fragments/scripts.html :: script}"></th:block>
 </html>
 </th:block>
 

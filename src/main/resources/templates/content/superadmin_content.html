@@ -96,51 +96,6 @@
 
 
 
-<th:block th:fragment="sa_menu(route)">
-    <div class="menu">
-        <em><i class="fas fa-umbrella"></i> Организации</em>
-        <ul>
-            <li>
-                <a class="active" th:if="${route == 'list'}">Список</a>
-                <a th:href="@{/superadmin}" th:unless="${route == 'list'}">Список</a>
-            </li>
-            <li>
-                <a class="active" th:if="${route == 'seek'}">Поиск</a>
-                <a th:href="@{/}" th:unless="${route == 'seek'}">Поиск</a>
-            </li>
-            <li>
-                <a class="active" th:if="${route == 'addfirm'}">Создать</a>
-                <a th:href="@{/superadmin/addfirm}" th:unless="${route == 'addfirm'}">Создать</a>
-            </li>
-        </ul>
-    </div>
-</th:block>
-
-<th:block th:fragment="sa_admins_menu(route)">
-    <div class="menu">
-        <i class="fas fa-universal-access"></i>
-        <em th:if="${route == 'adminlist'}" th:utext="' Админы<br>'+${firmname}"></em>
-        <em th:unless="${route == 'adminlist'}" th:utext="' Админы<br>'+${admin.getFirmname()}"></em>
-        <ul>
-            <li>
-                <a class="active" th:if="${route == 'adminlist'}">Список</a>
-                <a th:href="@{/superadmin/adminlist/{id}(id=${firmid})}" th:unless="${route == 'adminlist'}">Список</a>
-            </li>
-            <li>
-                <a class="active" th:if="${route == 'seek'}">Поиск</a>
-                <a href="@{/}" th:unless="${route == 'seek'}">Поиск</a>
-            </li>
-            <li>
-                <a class="active" th:if="${route == 'addadmin'}">Создать</a>
-                <a th:href="@{/superadmin/addadmin/{id}(id=${firmid})}" th:unless="${route == 'addadmin'}">Создать</a>
-            </li>
-            <li>
-                <a th:href="@{/superadmin}">Организации</a>
-            </li>
-        </ul>
-    </div>
-</th:block>
-
 
 <th:block th:fragment="admin_list">
     <table class="table">

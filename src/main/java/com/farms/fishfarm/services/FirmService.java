@@ -181,5 +181,10 @@ public class FirmService {
        return addVirtualSadok(vsadok);
    }
 
+public void deleteFerm(Ferm ferm) {
+	// TODO Auto-generated method stub
+	fermRepository.delete(ferm);
+}
+
 
 }

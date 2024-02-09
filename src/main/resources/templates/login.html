@@ -1,8 +1,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
-    <th:block th:insert="~{fragments/common.html :: meta}"></th:block>
-    <th:block th:insert="~{fragments/common.html :: styles}"></th:block>
-    <th:block th:insert="~{fragments/common.html :: title('login')}"></th:block>
+    <th:block th:insert="~{fragments/meta.html :: meta}"></th:block>
+    <th:block th:insert="~{fragments/styles.html :: styles}"></th:block>
+    <th:block th:insert="~{fragments/title.html :: title('login')}"></th:block>
 </head>
 <body>
 <!-- <div th:if="${param.error}"> -->
@@ -21,5 +21,5 @@
     <input type="submit" value="Войти"/>
     </form>
 </body>
-    <th:block th:insert="~{fragments/common.html :: script}"></th:block>
+    <th:block th:insert="~{fragments/scripts.html :: script}"></th:block>
 </html>

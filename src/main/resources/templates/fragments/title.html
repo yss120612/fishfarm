@@ -1,0 +1,21 @@
+<th:block th:fragment="title(route)">
+    <title th:switch="${route}">
+        <th:block th:case="home">Добро пожаловать</th:block>
+        <th:block th:case="list">Список организаций</th:block>
+        <th:block th:case="addfirm">Создание новой организации</th:block>
+        <th:block th:case="editfirm">Редактирование организации</th:block>
+        <th:block th:case="delfirm">Удаление организации</th:block>
+        <th:block th:case="adminlist">Админы организации</th:block>
+        <th:block th:case="addadmin">СОздание админа</th:block>
+        <th:block th:case="editadmin">Сброс пароля админа</th:block>
+        <th:block th:case="fermlist">Список ферм</th:block>
+        <th:block th:case="addferm">Добавление фермы</th:block>
+        <th:block th:case="editferm">Редактирование фермы</th:block>
+        <th:block th:case="delferm">Удаление фермы</th:block>
+        <th:block th:case="seek">Поиск пользователя</th:block>
+        <th:block th:case="contacts">Список контактов пользователя</th:block>
+        <th:block th:case="login">Авторизация</th:block>
+        <th:block th:case="*">Unknown!</th:block>
+        | Spring-Boot Demo
+    </title>
+</th:block>
