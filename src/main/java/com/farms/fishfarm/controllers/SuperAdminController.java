@@ -117,7 +117,7 @@ public SuperAdminController(UDService uDService, FirmService firmService) {
 
 
     @GetMapping("/editadmin/{idfirm}/{id}")
-    public String addAdmin(@PathVariable(name = "idfirm") Long idfirm, @PathVariable(name = "id") Long id, Model model){
+    public String editAdmin(@PathVariable(name = "idfirm") Long idfirm, @PathVariable(name = "id") Long id, Model model){
         Firm firm= firmService.findById(idfirm);
         User user= uDService.getUserById(id);
         if (firm==null || user==null) return "redirect:/superadmin/adminslist/%d".formatted(idfirm);
@@ -154,7 +154,7 @@ public SuperAdminController(UDService uDService, FirmService firmService) {
     @PostMapping("/saveadmin")
     public String saveAdmin(@ModelAttribute(name = "admin") UserHelper admin){
         if (admin.getPass1()==null || admin.getPass1().isEmpty() || !admin.getPass1().equals(admin.getPass2())){
-            return "redirect:/adminlist/%d".formatted(admin.getFirmid());    
+            return "redirect:/superadmin/adminlist/%d".formatted(admin.getFirmid());    
         }
         // Logger logger = LoggerFactory.getLogger(SuperAdminController.class);
         // logger.info("username=%s password=%S".formatted(admin.getUsername(),admin.getPass1()));

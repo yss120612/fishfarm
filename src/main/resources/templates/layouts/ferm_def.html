@@ -1,0 +1,54 @@
+<th:block th:fragment="default(route)">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <th:block th:insert="~{fragments/meta.html :: meta}"></th:block>
+    <th:block th:insert="~{fragments/styles.html :: styles}"></th:block>
+    <th:block th:insert="~{fragments/title.html :: title(${route})}"></th:block>
+</head>
+
+<body>
+
+<div class="container-fluid">
+<div class="row row-cols-1 sticky-top">
+    <div class="col">
+        <br>
+        <a th:href="@{/logout}">logout</a>
+        <br>
+    </div>
+</div>
+<div class="row row-cols-1">
+    <div class="col">
+        <h3  th:text = "|Работа с фермой «${fermName}»|" >Ferm</h3>
+        <h4 th:text = "${errorMessage}" class="text-danger"> Error</h4>
+    </div>
+</div>
+<div class="row row-cols-2">
+    <div class="col col col-md-3">
+        <th:block th:insert="~{content/ferm_menu.html :: menu(${route})}"></th:block>
+    </div>
+    <div class="col">
+            <p th:switch="${route}">
+                <th:block th:case="realsadoklist">
+                    <th:block th:insert="~{content/ferm_content.html :: realsadoklist}"></th:block>
+                </th:block>    
+            </p>
+        
+    </div>
+</div>
+<div class="row row-cols-1 fixed-bottom">
+    <div class="col">
+        <th:block th:insert="~{fragments/footer.html :: footer}"></th:block>
+    </div>
+</div>
+</div>
+
+</body>
+<th:block th:insert="~{fragments/scripts.html :: script}"></th:block>
+</html>
+</th:block>
+
+
+
+

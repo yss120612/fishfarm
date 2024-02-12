@@ -62,8 +62,6 @@
             <button type="reset" class="btn btn-outline-secondary">Очистить</button>
         </div>
     </form>
-
-
 </th:block>
 
 
@@ -93,9 +91,6 @@
         </div>
     </form>
 </th:block>
-
-
-
 
 <th:block th:fragment="admin_list">
     <table class="table">
@@ -131,7 +126,7 @@
         <div class="form-header" th:if="${route == 'addadmin'}"><h3>Добавление админа</h3></div>
         <div class="form-header" th:if="${route == 'editadmin'}"><h3>Сброс пароля админа</h3></div>
         <input type="hidden" class="form-control" name="id" th:field ="*{id}"/>
-        <input type="hidden" class="form-control" name="firmid" th:field ="*{firmid}"/>
+        <input type="hidden" class="form-control" name="firmId" th:field ="*{firmId}"/>
         <div class="form-row">
             <label for="shortname" class="form-label">Логин</label>
             <input type="text" th:if="${route == 'addadmin'}" class="form-control" name="shortname" th:field ="*{username}"/>

@@ -64,6 +64,21 @@ public class UDService implements UserDetailsService {
     }
 
   
+    public boolean addRoleToUser(User user, String rolename) {
+        Role frole = null;
+        frole = roleRepository.findByName(rolename).orElse(null);
+        if (user == null || frole == null)
+            return false;
+
+        if (!user.getRoles().contains(frole)) {
+            user.getRoles().add(frole);
+            //userRepository.save(user);
+            return true;
+        }
+
+        return false;// role already exists
+    }
+
 
     public boolean addRoleToUserByName(String username, String rolename) {
         User fuser = null;
@@ -82,6 +97,11 @@ public class UDService implements UserDetailsService {
         return false;// role already exists
     }
 
+    public List<Role>  getAllRoles(){
+        List<Role> result=roleRepository.findAll();
+        result.removeIf(e->e.getName().equals("ROLE_SUPER_ADMIN"));
+        return result;
+    }
 
     public boolean addUser(String name, String pass, Long firm, String email, String description) {
         User u = new User();
@@ -114,6 +134,10 @@ public class UDService implements UserDetailsService {
         return addUser(u);
     }
 
+    public void saveUser(User u){
+        userRepository.save(u);
+    }
+
     public boolean addUser(User user) {
         User fuser = null;
         Long id = 0L;
@@ -131,7 +155,7 @@ public class UDService implements UserDetailsService {
         } else {
             if (id == 0)
                 user.setPassword(passEncoder.encode(user.getPassword()));
-            userRepository.save(user);// insert-update user
+                userRepository.save(user);// insert-update user
         }
         return true;
     }

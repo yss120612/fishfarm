@@ -1,11 +1,8 @@
 <th:block th:fragment="menu(route)">
     <div class="menu">
-        <i class="fas fa-warehouse"></i> <em> Фермы, пользователи</em>
+        <i class="fas fa-water text-primary"></i> <em> Ферма</em>
         <ul>
-            <!-- <li th:if="${route == 'fermlist' or route=='addferm'} ">
-                HIHi
-            </li> -->
-            <li th:unless="${route == 'fermlist'}">
+            <!-- <li th:unless="${route == 'fermlist'}">
                 <a th:href="@{/firmadmin}" >Список ферм</a>
             </li>
             <li th:unless="${route == 'userlist'}">
@@ -16,7 +13,7 @@
             </li>
             <li th:unless="${route == 'adduser'}">
                 <a th:href="@{/firmadmin/adduser}">Создать пользоватея</a>
-            </li>
+            </li> -->
        </ul>
     </div>
 </th:block>

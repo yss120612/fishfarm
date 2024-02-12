@@ -13,7 +13,6 @@ import java.util.Optional;
 public interface FermRepository extends JpaRepository<Ferm,Long> {
 
  Optional <Ferm> findByName(String name);
- Optional <Ferm> findById(Long id);
  List<Ferm> findByFirmId(Firm firmId);
  
 }

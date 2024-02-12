@@ -18,6 +18,21 @@ public class Role implements GrantedAuthority{
     @Column(name="descr", length = 1024)
     private String comment;
 
+    @Transient
+    private boolean hasRole;
+
+    public boolean isHasRole() {
+        return this.hasRole;
+    }
+
+    public boolean getHasRole() {
+        return this.hasRole;
+    }
+
+    public void setHasRole(boolean hasRole) {
+        this.hasRole = hasRole;
+    }
+    
     public Long getId() {
         return this.id;
     }

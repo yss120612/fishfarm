@@ -20,31 +20,32 @@
 </div>
 <div class="row row-cols-1">
     <div class="col">
-        <h3  th:text = "'Администрирование организации «'+${firmname}+'»'" >Admin</h3>
+        <h3  th:text = "|Администрирование организации «${firmname}»|" >Admin</h3>
         <h4 th:text = "${errorMessage}" class="text-danger"> Error</h4>
     </div>
 </div>
 <div class="row row-cols-2">
     <div class="col col col-md-3">
-        <p th:switch="${route}">
+        <th:block th:insert="~{content/firmadmin_menu.html :: menu(${route})}"></th:block>
+        <!-- <p th:switch="${route}">
             <th:block th:case="fermlist">
-                <th:block th:insert="~{content/firmadmin_content.html :: menu(${route})}"></th:block>
+                <th:block th:insert="~{content/firmadmin_menu.html :: menu(${route})}"></th:block>
             </th:block>    
             <th:block th:case="addferm">
-                <th:block th:insert="~{content/firmadmin_content.html :: menu(${route})}"></th:block>
+                <th:block th:insert="~{content/firmadmin_menu.html :: menu(${route})}"></th:block>
             </th:block>    
             <th:block th:case="editferm">
-                <th:block th:insert="~{content/firmadmin_content.html :: menu(${route})}"></th:block>
+                <th:block th:insert="~{content/firmadmin_menu.html :: menu(${route})}"></th:block>
             </th:block>    
             <th:block th:case="delferm">
-                <th:block th:insert="~{content/firmadmin_content.html :: menu(${route})}"></th:block>
+                <th:block th:insert="~{content/firmadmin_menu.html :: menu(${route})}"></th:block>
             </th:block>    
-        </p>
+        </p> -->
     </div>
     <div class="col">
             <p th:switch="${route}">
                 <th:block th:case="fermlist">
-                    <th:block th:insert="~{content/firmadmin_content.html :: fermlist_content}"></th:block>
+                    <th:block th:insert="~{content/firmadmin_content.html :: fermlist}"></th:block>
                 </th:block>    
                 <th:block th:case="addferm">
                     <th:block th:insert="~{content/firmadmin_content.html :: addferm(${route})}"></th:block>
@@ -54,6 +55,24 @@
                 </th:block>    
                 <th:block th:case="delferm">
                     <th:block th:insert="~{content/firmadmin_content.html :: delferm}"></th:block>
+                </th:block>    
+                <th:block th:case="userlist">
+                    <th:block th:insert="~{content/firmadmin_content.html :: userlist(${route})}"></th:block>
+                </th:block>    
+                <th:block th:case="adduser">
+                    <th:block th:insert="~{content/firmadmin_content.html :: addfirmuser}"></th:block>
+                </th:block>    
+                <th:block th:case="edituser">
+                    <th:block th:insert="~{content/firmadmin_content.html :: editfirmuser}"></th:block>
+                </th:block>    
+                <th:block th:case="deluser">
+                    <th:block th:insert="~{content/firmadmin_content.html :: delfirmuser}"></th:block>
+                </th:block>    
+                <th:block th:case="edituserroles">
+                    <th:block th:replace="~{content/firmadmin_content.html :: edituserroles}"></th:block>
+                </th:block>    
+                <th:block th:case="resetpassuser">
+                    <th:block th:replace="~{content/firmadmin_content.html :: resetpassuser}"></th:block>
                 </th:block>    
             </p>
         
@@ -67,9 +86,10 @@
 </div>
 
 </body>
-<th:block th:insert="~{fragments/sctripts.html :: script}"></th:block>
+<th:block th:insert="~{fragments/scripts.html :: script}"></th:block>
 </html>
 </th:block>
+
 
 
 
