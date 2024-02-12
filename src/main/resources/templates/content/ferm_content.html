@@ -1,4 +1,4 @@
-<th:block th:fragment="fermlist">
+<th:block th:fragment="realsadoklist">
     <table class="table">
         <thead>
             <tr>
@@ -8,23 +8,23 @@
             </tr>
         </thead>
         <tbody>
-            <tr th:each="ferm:${ferms}">
-                <td th:text="${fermStat.count}"></td>
-                <td th:utext="${ferm.getName()+'<br>Садков: '+ferm.getRealSadok.size()}"></td>
+            <tr th:each="rsadok:${rsadoks}">
+                <td th:text="${rsadok.name}"></td>
+                <td th:utext="${rsadok.description+'<br>Садков: '+ferm.virtualSadoks.size()}"></td>
 
                 <td>
                     <div class="action">
                         <div class="action-btn">
-                            <a th:href="@{/firmadmin/editferm/{id}(id=${ferm.getId()})}">
+                            <a th:href="@{/ferm/editrsadok/{id}(id=${rsadok.id})}">
                                 <i class="far fa-edit text-success" title="Редактировать"></i>
                                 </a>
                         </div>
                         <div class="action-btn">
-                            <a th:href="@{/firmadmin/adminslist/{id}(id=${ferm.getId()})}"><i
+                            <a th:href="@{/ferm/vsadokslist/{id}(id=${rsadok.id})}"><i
                                     class="fas fa-water text-primary" title="Садки"></i></a>
                         </div>
                         <div class="action-btn">
-                            <a th:href="@{/firmadmin/delferm/{id}(id=${ferm.getId()})}">
+                            <a th:href="@{/ferm/delrsadok/{id}(id=${rsadok.id})}">
                                 <i class="far fa-trash-alt text-danger" title="Удалить"></i></a>
                         </div>
                

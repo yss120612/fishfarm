@@ -55,6 +55,7 @@ public class FermController {
         fe=null;
         errorMessage="";
         this.firmService = firmService;
+        this.fermService = fermService;
         this.uDService = uDService;
 
     }
@@ -84,7 +85,7 @@ public class FermController {
     }
 
     @GetMapping("{id}")
-    public String sadokList(@PathVariable(name = "id") Long id,Model model){
+    public String rsadokList(@PathVariable(name = "id") Long id,Model model){
         Ferm ferm = fermService.getFermById(id);
         errorMessage="";
         if (!isMyFerm(ferm)){
@@ -96,7 +97,7 @@ public class FermController {
         model.addAttribute("errorMessage",errorMessage);
         model.addAttribute("rsadiks",rsadoks);
 
-        return "start/sadoklist";
+        return "start/realsadoklist";
     }
 
 
